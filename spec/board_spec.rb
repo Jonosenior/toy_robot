@@ -27,9 +27,22 @@ RSpec.describe ToyRobot::Board do
     end
 
     describe '#new_location' do
-      it 'returns new location' do
+      it 'returns correct location when facing NORTH' do
         expect(board.new_location([0,0], "NORTH")).to eq([0,1])
       end
+
+      it 'returns correct location when facing EAST' do
+        expect(board.new_location([0,0], "EAST")).to eq([1,0])
+      end
+
+      it 'returns correct location when facing WEST' do
+        expect(board.new_location([5,5], "WEST")).to eq([4,5])
+      end
+
+      it 'returns correct location when facing SOUTH' do
+        expect(board.new_location([3,2], "SOUTH")).to eq([3,1])
+      end
+
     end
   end
 
