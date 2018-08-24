@@ -1,4 +1,4 @@
-require File.expand_path('../../lib/toy_robot', __FILE__)
+require File.expand_path('../../lib/toy_robot/robot', __FILE__)
 
 RSpec.describe ToyRobot::Robot do
   subject(:robot) { ToyRobot::Robot.new([0,0], 'NORTH') }
