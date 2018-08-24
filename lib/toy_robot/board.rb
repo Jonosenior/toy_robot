@@ -14,7 +14,9 @@ module ToyRobot
 
     def new_location(current_location, facing)
       moves = { "NORTH" => [current_location[0], current_location[1] + 1],
-                "EAST" => [current_location[0] + 1, current_location[1]]
+                "EAST" => [current_location[0] + 1, current_location[1]],
+                "SOUTH" => [current_location[0], current_location[1] - 1],
+                "WEST" => [current_location[0] - 1, current_location[1]],
               }
       # binding.pry
       moves[facing]
