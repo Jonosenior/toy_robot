@@ -9,5 +9,8 @@ module ToyRobot
       return false if location[1] < 0 || location[1] > @size[1]
       true
     end
+
+    def new_location(current_location, facing)
+    end
   end
 end

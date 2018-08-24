@@ -27,7 +27,9 @@ RSpec.describe ToyRobot::Board do
     end
 
     describe '#new_location' do
-      
+      it 'returns new location' do
+        expect(board.new_location([0,0], "NORTH")).to eq([0,1])
+      end
     end
   end
 
