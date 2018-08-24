@@ -24,9 +24,10 @@ RSpec.describe ToyRobot::Board do
       it 'returns valid location as valid' do
         expect(board.valid_location?([0,0])).to be_truthy
       end
+    end
 
-
-
+    describe '#new_location' do
+      
     end
   end
 

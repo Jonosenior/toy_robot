@@ -13,21 +13,19 @@ RSpec.describe ToyRobot::Robot do
     end
   end
 
-  context 'when told to turn left' do
-    it 'returns the new facing direction' do
+  context '#turn' do
+    it 'can turn left from North' do
       robot.turn('left')
       expect(robot.facing).to eq('WEST')
     end
-  end
 
-  context 'when told to turn right' do
-    it 'returns the new facing direction' do
+    it 'can turn right from East' do
       robot.turn('right')
       expect(robot.facing).to eq('EAST')
     end
   end
 
-  context 'when told to move' do
+  context '#move_to' do
     it 'changes location' do
       robot.move_to([5,5])
       expect(robot.location).to eq([5,5])
