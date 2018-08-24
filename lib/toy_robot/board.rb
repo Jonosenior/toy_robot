@@ -1,9 +1,11 @@
-require 'pry'
-
 module ToyRobot
   class Board
     def initialize(size)
       @size = size
+    end
+
+    def valid_move?(current_location, facing)
+      valid_location?(location_after_move(current_location, facing))
     end
 
     def valid_location?(location)
@@ -12,13 +14,12 @@ module ToyRobot
       true
     end
 
-    def new_location(current_location, facing)
+    def location_after_move(current_location, facing)
       moves = { "NORTH" => [current_location[0], current_location[1] + 1],
                 "EAST" => [current_location[0] + 1, current_location[1]],
                 "SOUTH" => [current_location[0], current_location[1] - 1],
                 "WEST" => [current_location[0] - 1, current_location[1]],
               }
-      # binding.pry
       moves[facing]
     end
   end
