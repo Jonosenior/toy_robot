@@ -3,7 +3,6 @@ require 'pry'
 
 module ToyRobot
   class Application
-    attr_reader :board
 
     def initialize
       @board = ToyRobot::Board.new([5,5])
@@ -13,12 +12,11 @@ module ToyRobot
       loop do
         input = elicit_input
         input = convert_input(input)
-        binding.pry
         if !is_input_valid?(input)
           puts 'Please make a valid move!'
           redo
         end
-        @robot = ToyRobot::Robot.new(input[:location], input[:facing])
+        make_move(input)
       end
     end
 
@@ -30,6 +28,22 @@ module ToyRobot
       return false if command == "PLACE" && !@board.valid_location?(input[:location])
       return false if command == "MOVE" && !@board.valid_move?(@robot.location, @robot.facing)
       true
+    end
+
+    def make_move(input)
+      case input[:command]
+        when "PLACE"
+          @robot = ToyRobot::Robot.new(input[:location], input[:facing])
+        when "MOVE"
+          new_location = @board.location_after_move(@robot.location, @robot.facing)
+          @robot.move_to(new_location)
+        when "LEFT"
+          @robot.turn("LEFT")
+        when "RIGHT"
+          @robot.turn("RIGHT")
+        when "REPORT"
+          puts "#{@robot.location[0]},#{@robot.location[1]},#{@robot.facing}"
+      end
     end
 
     def convert_input(input)
