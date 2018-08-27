@@ -8,7 +8,7 @@ RSpec.describe ToyRobot::Robot do
   #   # allow(player).to receive(:gets).and_return("Jonathan")
   # end
 
-  context 'when initialized' do
+  context '#initialize' do
     it 'returns the location' do
       expect(robot.location).to eq([0,0])
     end

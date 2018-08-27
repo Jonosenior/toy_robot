@@ -3,8 +3,9 @@ module ToyRobot
   class Robot
     attr_reader :location, :facing
 
-    def initialize(location, facing)
-      @location, @facing = location, facing
+    def initialize(input)
+      @location = input.fetch(:location)
+      @facing = input.fetch(:facing)
     end
 
     def move_to(location)
