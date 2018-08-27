@@ -1,4 +1,5 @@
 require_relative '../lib/toy_robot/board'
+require_relative '../lib/toy_robot/robot'
 require 'pry'
 
 module ToyRobot
@@ -12,6 +13,7 @@ module ToyRobot
       loop do
         input = elicit_input
         input = convert_input(input)
+        # binding.pry
         if !is_input_valid?(input)
           puts 'Please make a valid move!'
           redo
@@ -42,20 +44,20 @@ module ToyRobot
         when "RIGHT"
           @robot.turn("RIGHT")
         when "REPORT"
-          puts "#{@robot.location[0]},#{@robot.location[1]},#{@robot.facing}"
+          puts "\n#{@robot.location[0]},#{@robot.location[1]},#{@robot.facing}\n"
       end
     end
 
     def convert_input(input)
       input = input.split(/[\s^,]+/)
       input = { command: input[0],
-                location: [input[1], input[2]],
+                location: [input[1].to_i, input[2].to_i],
                 facing: input[3]
               }
     end
 
     def elicit_input
-      puts "Choose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT"
+      puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\n\n"
       gets.chomp
     end
   end
