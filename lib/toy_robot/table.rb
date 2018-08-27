@@ -1,5 +1,5 @@
 module ToyRobot
-  class Board
+  class Table
     def initialize(size)
       @size = size
     end

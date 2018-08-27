@@ -1,4 +1,4 @@
-require_relative '../lib/toy_robot/board'
+require_relative '../lib/toy_robot/table'
 require_relative '../lib/toy_robot/robot'
 require 'pry'
 
@@ -6,7 +6,7 @@ module ToyRobot
   class Application
 
     def initialize
-      @board = ToyRobot::Board.new([5,5])
+      @table = ToyRobot::Table.new([5,5])
     end
 
     def new_round
@@ -29,11 +29,11 @@ module ToyRobot
       if command == "PLACE"
         possible_directions = ['NORTH', 'EAST', 'SOUTH', 'WEST']
         return false unless possible_directions.include?(input[:facing])
-        return false if !@board.valid_location?(input[:location])
+        return false if !@table.valid_location?(input[:location])
         return true
       end
       return false if !@robot && command != "PLACE"
-      return false if command == "MOVE" && !@board.valid_move?(@robot.location, @robot.facing)
+      return false if command == "MOVE" && !@table.valid_move?(@robot.location, @robot.facing)
       true
     end
 
@@ -42,7 +42,7 @@ module ToyRobot
         when "PLACE"
           create_robot(input)
         when "MOVE"
-          new_location = @board.location_after_move(@robot.location, @robot.facing)
+          new_location = @table.location_after_move(@robot.location, @robot.facing)
           @robot.move_to(new_location)
         when "LEFT"
           @robot.turn("LEFT")
