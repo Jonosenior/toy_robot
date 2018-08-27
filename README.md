@@ -88,3 +88,6 @@ REPORT
 The Toy Robot Challenge was originally formulated by [Jon Eaves](https://twitter.com/joneaves)
 
 ## Installation
+
+## Notes
+- The app stores the x,y co-ordinates as like so: [x, y].

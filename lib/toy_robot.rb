@@ -14,12 +14,22 @@ module ToyRobot
         input = elicit_input
         input = convert_input(input)
         binding.pry
-        if !@board.valid_location?(input[:location])
-          puts 'Not a valid location!'
+        if !is_input_valid?(input)
+          puts 'Please make a valid move!'
           redo
         end
-        @robot.new(input[:location], input[:facing])
+        @robot = ToyRobot::Robot.new(input[:location], input[:facing])
       end
+    end
+
+    def is_input_valid?(input)
+      command = input[:command]
+      possible_commands = ["PLACE", "MOVE", "LEFT", "RIGHT", "REPORT"]
+      return false unless possible_commands.include?(command)
+      return false if !@robot && command != "PLACE"
+      return false if command == "PLACE" && !@board.valid_location?(input[:location])
+      return false if command == "MOVE" && !@board.valid_move?(@robot.location, @robot.facing)
+      true
     end
 
     def convert_input(input)
