@@ -15,7 +15,7 @@ module ToyRobot
         input = convert_input(input)
         # binding.pry
         if !is_input_valid?(input)
-          puts 'Please make a valid move!'
+          puts 'Please give a valid instruction!'
           redo
         end
         make_move(input)
@@ -26,8 +26,13 @@ module ToyRobot
       command = input[:command]
       possible_commands = ["PLACE", "MOVE", "LEFT", "RIGHT", "REPORT"]
       return false unless possible_commands.include?(command)
+      if command == "PLACE"
+        possible_directions = ['NORTH', 'EAST', 'SOUTH', 'WEST']
+        return false unless possible_directions.include?(input[:facing])
+        return false if !@board.valid_location?(input[:location])
+        return true
+      end
       return false if !@robot && command != "PLACE"
-      return false if command == "PLACE" && !@board.valid_location?(input[:location])
       return false if command == "MOVE" && !@board.valid_move?(@robot.location, @robot.facing)
       true
     end
@@ -50,7 +55,7 @@ module ToyRobot
 
     def convert_input(input)
       input = input.split(/[\s^,]+/)
-      input = { command: input[0],
+      input = { command: input[0].upcase,
                 location: [input[1].to_i, input[2].to_i],
                 facing: input[3]
               }

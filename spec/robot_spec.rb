@@ -20,12 +20,12 @@ RSpec.describe ToyRobot::Robot do
 
   context '#turn' do
     it 'can turn left from North' do
-      robot.turn('left')
+      robot.turn('LEFT')
       expect(robot.facing).to eq('WEST')
     end
 
     it 'can turn right from East' do
-      robot.turn('right')
+      robot.turn('RIGHT')
       expect(robot.facing).to eq('EAST')
     end
   end
