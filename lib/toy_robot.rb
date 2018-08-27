@@ -40,7 +40,7 @@ module ToyRobot
     def make_move(input)
       case input[:command]
         when "PLACE"
-          @robot = ToyRobot::Robot.new(input[:location], input[:facing])
+          create_robot(input)
         when "MOVE"
           new_location = @board.location_after_move(@robot.location, @robot.facing)
           @robot.move_to(new_location)
@@ -59,6 +59,12 @@ module ToyRobot
                 location: [input[1].to_i, input[2].to_i],
                 facing: input[3]
               }
+    end
+
+    def create_robot(input)
+      location = input[:location]
+      facing = input[:facing]
+      @robot = ToyRobot::Robot.new({location: location, facing: facing})
     end
 
     def elicit_input
