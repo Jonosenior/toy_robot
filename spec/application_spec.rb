@@ -16,6 +16,34 @@ RSpec.describe ToyRobot::Application do
     end
   end
 
+  context '#valid_instruction?' do
+    context 'when command is invalid' do
+      instruction = { command: "PLECE" }
+
+      it 'returns false' do
+        expect(app.valid_instruction?(instruction)).to be_falsey
+      end
+    end
+
+    context 'when command is PLACE' do
+      it 'returns false if a co-ordinate is nil' do
+        instruction = { command: "PLACE", location: [nil,1], facing:"SOUTH"  }
+        expect(app.valid_instruction?(instruction)).to be_falsey
+      end
+
+      it 'returns false if facing is invalid' do
+        instruction = { command: "PLACE", location: [nil,1], facing:"DOWN"  }
+        expect(app.valid_instruction?(instruction)).to be_falsey
+      end
+
+      it 'returns true if instruction is valid' do
+        instruction = { command: "PLACE", location: [2,3], facing: "NORTH" }
+        expect(app.valid_instruction?(instruction)).to be_truthy
+      end
+    end
+
+  end
+
   context '#make_move' do
     context 'when command is PLACE' do
 
@@ -98,9 +126,17 @@ RSpec.describe ToyRobot::Application do
       it 'prints the robot\'s location and facing direction' do
         instruction = {command: "REPORT"}
         expect { app.make_move(instruction) }.to output("\n2,3,SOUTH\n").to_stdout
-
       end
     end
+
+    context 'when command is EXIT' do
+      instruction = { command: "EXIT" }
+
+      it 'exits the program' do
+        expect { app.make_move(instruction) }.to raise_error SystemExit
+      end
+    end
+
   end
 
   context '#create_robot' do

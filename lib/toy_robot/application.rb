@@ -21,20 +21,21 @@ module ToyRobot
     end
 
     def valid_instruction?(instruction)
-      # begin
+      begin
         command = instruction[:command]
+        # binding.pry
         return false unless possible_commands.include?(command)
         if command == "PLACE"
           return false unless possible_directions.include?(instruction[:facing])
           return false if !@table.valid_location?(instruction[:location])
           return true
         end
-        return false if !@robot && command != "PLACE"
+        return false if !@robot && command != "PLACE" || command != "EXIT"
         binding.pry
         return false if command == "MOVE" && !@table.valid_move?(@robot.location_and_facing)
-      # rescue
-      #   return false
-      # end
+      rescue
+        return false
+      end
       true
     end
 
@@ -77,7 +78,7 @@ module ToyRobot
 
 
     def elicit_input
-      puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\n\n"
+      puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\nEXIT\n\n"
       gets.chomp
     end
 
@@ -90,7 +91,7 @@ module ToyRobot
     end
 
     def possible_commands
-      ["PLACE", "MOVE", "LEFT", "RIGHT", "REPORT"]
+      ["PLACE", "MOVE", "LEFT", "RIGHT", "REPORT", "EXIT"]
     end
 
     def number_or_nil(string)

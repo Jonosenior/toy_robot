@@ -7,4 +7,4 @@ module ToyRobot
 end
 
 app = ToyRobot::Application.new
-app.new_round
+app.start
