@@ -11,6 +11,20 @@ Any movement that would result in the robot falling
 from the table must be prevented, however further
 valid movement commands must still be allowed.
 
+## Installation
+
+Open your terminal/command line. Navigate to the directory where you want this project to live. To clone and play, type:
+```
+$ git clone https://github.com/Jonosenior/toy_robot.git
+$ cd toy_robot
+$ ruby lib/toy_robot.rb
+```
+
+To run the test suite, type:
+```
+$ bundle exec rspec spec
+```
+
 ## Task
 
 Create an application that can read in commands of the following form:
