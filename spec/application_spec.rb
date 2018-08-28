@@ -7,12 +7,18 @@ RSpec.describe ToyRobot::Application do
 
   before do
     allow_any_instance_of(IO).to receive(:puts)
-    # allow(app).to receive(:gets).and_return("Jonathan")
   end
 
   context '#initialize' do
     it 'creates a new table' do
       expect(app.instance_variable_get('@table').class).to eq(ToyRobot::Table)
+    end
+  end
+
+  context 'start' do
+    it 'will not accept invalid command' do
+      allow(app).to receive(:gets).and_return("REPORT")
+      expect { app.start }.to output('Please give a valid instruction!').to_stdout
     end
   end
 
@@ -48,7 +54,7 @@ RSpec.describe ToyRobot::Application do
     end
 
     context 'when command is MOVE' do
-      it 'returns false if off board' do
+      it 'returns false if robot falls off board' do
         instruction = { command: "PLACE", location: [5,5], facing: "NORTH" }
         app.make_move(instruction)
         instruction = { command: "MOVE" }
