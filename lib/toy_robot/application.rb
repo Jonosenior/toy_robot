@@ -79,7 +79,7 @@ module ToyRobot
 
 
     def elicit_input
-      puts '\n\nChoose:\nPLACE X,Y,F (e.g. "PLACE 0,3,NORTH")\nMOVE\nLEFT\nRIGHT\nREPORT\nEXIT\n\n'
+      puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\nEXIT\n\n"
       gets.chomp
     end
 
