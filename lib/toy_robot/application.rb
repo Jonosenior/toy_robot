@@ -21,7 +21,7 @@ module ToyRobot
     end
 
     def is_instruction_valid?(instruction)
-      begin
+      # begin
         command = instruction[:command]
         return false unless possible_commands.include?(command)
         if command == "PLACE"
@@ -30,10 +30,11 @@ module ToyRobot
           return true
         end
         return false if !@robot && command != "PLACE"
+        binding.pry
         return false if command == "MOVE" && !@table.valid_move?(@robot.location_and_facing)
-      rescue
-        return false
-      end
+      # rescue
+      #   return false
+      # end
       true
     end
 
@@ -49,6 +50,8 @@ module ToyRobot
           @robot.turn("RIGHT")
         when "REPORT"
           puts report_message
+        when "EXIT"
+          exit
       end
     end
 

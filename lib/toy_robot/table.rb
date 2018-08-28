@@ -5,9 +5,7 @@ module ToyRobot
     end
 
     def valid_move?(location_and_facing)
-      location = location_and_facing[:location]
-      facing = location_and_facing[:facing]
-      new_location = location_after_move(location, facing)
+      new_location = location_after_move(location_and_facing)
       valid_location?(new_location)
     end
 
