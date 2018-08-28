@@ -23,10 +23,8 @@ module ToyRobot
 
     def is_input_valid?(input)
       command = input[:command]
-      possible_commands = ["PLACE", "MOVE", "LEFT", "RIGHT", "REPORT"]
       return false unless possible_commands.include?(command)
       if command == "PLACE"
-        possible_directions = ['NORTH', 'EAST', 'SOUTH', 'WEST']
         return false unless possible_directions.include?(input[:facing])
         return false if !@table.valid_location?(input[:location])
         return true
@@ -70,5 +68,14 @@ module ToyRobot
       puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\n\n"
       gets.chomp
     end
+
+    def possible_directions
+      ['NORTH', 'EAST', 'SOUTH', 'WEST']
+    end
+
+    def possible_commands
+      ["PLACE", "MOVE", "LEFT", "RIGHT", "REPORT"]
+    end
+
   end
 end

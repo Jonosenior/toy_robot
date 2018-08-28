@@ -3,11 +3,6 @@ require File.expand_path('../../lib/toy_robot/robot', __FILE__)
 RSpec.describe ToyRobot::Robot do
   subject(:robot) { ToyRobot::Robot.new({location: [0,0], facing: 'NORTH'}) }
 
-  # before do
-  #   allow_any_instance_of(IO).to receive(:puts)
-  #   # allow(player).to receive(:gets).and_return("Jonathan")
-  # end
-
   context '#initialize' do
     it 'returns the location' do
       expect(robot.location).to eq([0,0])
