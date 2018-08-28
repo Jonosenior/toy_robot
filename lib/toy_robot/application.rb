@@ -46,7 +46,7 @@ module ToyRobot
         when "RIGHT"
           @robot.turn("RIGHT")
         when "REPORT"
-          puts "\n#{@robot.location[0]},#{@robot.location[1]},#{@robot.facing}\n"
+          puts report_message
       end
     end
 
@@ -67,6 +67,10 @@ module ToyRobot
     def elicit_input
       puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\n\n"
       gets.chomp
+    end
+
+    def report_message
+      "\n#{@robot.location[0]},#{@robot.location[1]},#{@robot.facing}\n"
     end
 
     def possible_directions

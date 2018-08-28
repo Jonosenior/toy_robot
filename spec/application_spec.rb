@@ -95,6 +95,19 @@ RSpec.describe ToyRobot::Application do
       end
 
     end
+
+    context 'when command is REPORT' do
+      before do
+        input = {command: "PLACE", location: [2,3], facing: "SOUTH"}
+        app.create_robot(input)
+      end
+
+      it 'prints the robot\'s location and facing direction' do
+        input = {command: "REPORT"}
+        expect { app.make_move(input) }.to output("\n2,3,SOUTH\n").to_stdout
+
+      end
+    end
   end
 
   context '#create_robot' do
