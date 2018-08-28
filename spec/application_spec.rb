@@ -15,12 +15,12 @@ RSpec.describe ToyRobot::Application do
     end
   end
 
-  context 'start' do
-    it 'will not accept invalid command' do
-      allow(app).to receive(:gets).and_return("REPORT")
-      expect { app.start }.to output('Please give a valid instruction!').to_stdout
-    end
-  end
+  # context 'start' do
+  #   it 'will not accept invalid command' do
+  #     allow(app).to receive(:gets).and_return("REPORT")
+  #     expect { app.start }.to output('Please give a valid instruction!').to_stdout
+  #   end
+  # end
 
   context '#valid_instruction?' do
     context 'when command is invalid' do

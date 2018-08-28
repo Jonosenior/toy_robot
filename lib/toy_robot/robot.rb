@@ -19,8 +19,8 @@ module ToyRobot
     end
 
     def location_and_facing
-      {location: @location, facing: @facing}
+      { location: @location, facing: @facing }
     end
-    
+
   end
 end
