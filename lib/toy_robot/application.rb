@@ -30,7 +30,7 @@ module ToyRobot
         return true
       end
       return false if !@robot && command != "PLACE"
-      return false if command == "MOVE" && !@table.valid_move?(@robot.location, @robot.facing)
+      return false if command == "MOVE" && !@table.valid_move?(@robot.location_and_facing)
       true
     end
 
@@ -39,7 +39,7 @@ module ToyRobot
         when "PLACE"
           create_robot(input)
         when "MOVE"
-          new_location = @table.location_after_move(@robot.location, @robot.facing)
+          new_location = @table.location_after_move(@robot.location_and_facing)
           @robot.move_to(new_location)
         when "LEFT"
           @robot.turn("LEFT")

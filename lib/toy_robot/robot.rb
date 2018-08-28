@@ -17,5 +17,10 @@ module ToyRobot
       turn_right = { "NORTH" => "EAST", "EAST" => "SOUTH", "SOUTH" => "WEST", "WEST" => "NORTH" }
       @facing = (left_or_right == "LEFT") ? turn_left[@facing] : turn_right[@facing]
     end
+
+    def location_and_facing
+      {location: @location, facing: @facing}
+    end
+    
   end
 end

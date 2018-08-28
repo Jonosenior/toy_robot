@@ -4,8 +4,10 @@ module ToyRobot
       @size = size
     end
 
-    def valid_move?(current_location, facing)
-      new_location = location_after_move(current_location, facing)
+    def valid_move?(location_and_facing)
+      location = location_and_facing[:location]
+      facing = location_and_facing[:facing]
+      new_location = location_after_move(location, facing)
       valid_location?(new_location)
     end
 
@@ -15,7 +17,9 @@ module ToyRobot
       true
     end
 
-    def location_after_move(current_location, facing)
+    def location_after_move(current_location_facing)
+      current_location = current_location_facing[:location]
+      facing = current_location_facing[:facing]
       moves = { "NORTH" => [current_location[0], current_location[1] + 1],
                 "EAST" => [current_location[0] + 1, current_location[1]],
                 "SOUTH" => [current_location[0], current_location[1] - 1],

@@ -29,19 +29,23 @@ RSpec.describe ToyRobot::Table do
 
     describe '#location_after_move' do
       it 'returns correct location when facing NORTH' do
-        expect(table.location_after_move([0,0], "NORTH")).to eq([0,1])
+        location_and_facing = { location: [0,0], facing: "NORTH" }
+        expect(table.location_after_move(location_and_facing)).to eq([0,1])
       end
 
       it 'returns correct location when facing EAST' do
-        expect(table.location_after_move([0,0], "EAST")).to eq([1,0])
+        location_and_facing = { location: [0,0], facing: "EAST" }
+        expect(table.location_after_move(location_and_facing)).to eq([1,0])
       end
 
       it 'returns correct location when facing WEST' do
-        expect(table.location_after_move([5,5], "WEST")).to eq([4,5])
+        location_and_facing = { location: [5,5], facing: "WEST" }
+        expect(table.location_after_move(location_and_facing)).to eq([4,5])
       end
 
       it 'returns correct location when facing SOUTH' do
-        expect(table.location_after_move([3,2], "SOUTH")).to eq([3,1])
+        location_and_facing = { location: [3,2], facing: "SOUTH" }
+        expect(table.location_after_move(location_and_facing)).to eq([3,1])
       end
 
     end
