@@ -10,22 +10,27 @@ RSpec.describe ToyRobot::Application do
     # allow(app).to receive(:gets).and_return("Jonathan")
   end
 
-  # context '#initialize' do
-  #   it 'creates a new table' do
-  #     expect(app.table).to exist
+  context '#initialize' do
+    it 'creates a new table' do
+      expect(app.instance_variable_get('@table').class).to eq(ToyRobot::Table)
+    end
+  end
+
+  # context '#make_move' do
+  #   context 'when command is PLACE' do
+  #
+  #     it 'creates a new robot' do
+  #       input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+  #       app.make_move(input)
+  #       expect(app).to receive(:create_robot).with(input)
+  #     end
   #   end
   # end
 
-  context '#make_move' do
-    context 'when command is PLACE' do
-      let(:robot) { ToyRobot::Robot.new({location: "[0,1]", facing: "EAST"}) }
-
-      it 'creates a new robot' do
-        input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
-        #app.make_move(input)
-        app.create_robot(input)
-        expect(ToyRobot::Robot).to receive(:new)
-      end
+  context '#create_robot' do
+    it 'creates a robot' do
+      input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+      expect(app.create_robot(input)).to be_a ToyRobot::Robot
     end
   end
 
