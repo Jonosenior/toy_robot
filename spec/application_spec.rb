@@ -68,6 +68,27 @@ RSpec.describe ToyRobot::Application do
       end
     end
 
+    context 'when command is REPORT' do
+      it 'returns false if robot not yet placed' do
+        instruction = { command: "REPORT" }
+        expect(app.valid_instruction?(instruction)).to be_falsey
+      end
+
+      it 'returns true if robot is placed' do
+        instruction = { command: "PLACE", location: [1,1], facing: "SOUTH" }
+        app.make_move(instruction)
+        instruction = { command: "REPORT" }
+        expect(app.valid_instruction?(instruction)).to be_truthy
+      end
+    end
+
+    context 'when command is EXIT' do
+      it 'returns true' do
+        instruction = { command: "EXIT" }
+        expect(app.valid_instruction?(instruction)).to be_truthy
+      end
+    end
+
   end
 
   context '#make_move' do

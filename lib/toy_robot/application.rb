@@ -13,7 +13,7 @@ module ToyRobot
       loop do
         input = elicit_input
         instruction = convert_input(input)
-        if !valid_instruction?(instruction)
+        unless valid_instruction?(instruction)
           puts 'Please give a valid instruction!'
           redo
         end
@@ -22,19 +22,13 @@ module ToyRobot
     end
 
     def valid_instruction?(instruction)
-      begin
-        command = instruction[:command]
-        return false unless possible_commands.include?(command)
-        if command == "PLACE"
-          return false unless possible_directions.include?(instruction[:facing])
-          return false if !@table.valid_location?(instruction[:location])
-          return true
-        end
-        # binding.pry
-        return false if !@robot && (command != "PLACE" || command != "EXIT")
-        return false if command == "MOVE" && !@table.valid_move?(@robot.location_and_facing)
-      rescue
-        return false
+      command = instruction[:command]
+      return false unless possible_commands.include?(command)
+      if command == "PLACE"
+        return valid_place_command?(instruction)
+      else
+        return false if robot_not_placed? unless command == "EXIT"
+        return false if command == "MOVE" && falls_off_table?
       end
       true
     end
@@ -54,6 +48,13 @@ module ToyRobot
         when "EXIT"
           exit
       end
+    end
+
+    def valid_place_command?(instruction)
+      return false if instruction[:location].include?(nil)
+      return false unless possible_directions.include?(instruction[:facing])
+      return false if !@table.valid_location?(instruction[:location])
+      return true
     end
 
     def convert_input(input)
@@ -98,5 +99,14 @@ module ToyRobot
       num = string.to_i
       num if num.to_s == string
     end
+
+    def robot_not_placed?
+      !@robot
+    end
+
+    def falls_off_table?
+      !@table.valid_move?(@robot.location_and_facing)
+    end
+    
   end
 end
