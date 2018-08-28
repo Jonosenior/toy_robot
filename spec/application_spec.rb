@@ -19,27 +19,43 @@ RSpec.describe ToyRobot::Application do
   context '#make_move' do
     context 'when command is PLACE' do
 
-      it 'creates a new robot' do
+      it 'returns a robot' do
+        input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+        expect(app.make_move(input)).to be_a ToyRobot::Robot
+      end
+
+      it 'saves a new robot as instance variable' do
         input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
         app.make_move(input)
         expect(app.instance_variable_get('@robot').class).to eq(ToyRobot::Robot)
       end
 
-      it 'creates a robot with correct location' do
+      it 'saves a robot with correct location' do
         input = {command: "PLACE", location: "[4,5]", facing: "WEST"}
         app.make_move(input)
         expect(app.instance_variable_get('@robot').location).to eq(input[:location])
       end
 
-      it 'creates a robot with correct facing direction' do
+      it 'saves a robot with correct facing direction' do
         input = {command: "PLACE", location: "[4,5]", facing: "SOUTH"}
         app.make_move(input)
         expect(app.instance_variable_get('@robot').facing).to eq(input[:facing])
       end
 
-      it 'doesn\'t return nil' do
-
+      it 'sends a new message to Robot class' do
+        input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+        app.make_move(input)
+        expect(ToyRobot::Robot).to receive(:new)
       end
+
+    end
+
+    context 'when command is MOVE' do
+      before do
+        input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+        app.create_robot(input)
+      end
+
     end
   end
 
