@@ -24,28 +24,28 @@ module ToyRobot
     def valid_instruction?(instruction)
       command = instruction[:command]
       return false unless possible_commands.include?(command)
-      if command == "PLACE"
+      if command == 'PLACE'
         return valid_place_command?(instruction)
       else
-        return false if robot_not_placed? unless command == "EXIT"
-        return false if command == "MOVE" && falls_off_table?
+        return false if robot_not_placed? unless command == 'EXIT'
+        return false if command == 'MOVE' && falls_off_table?
       end
       true
     end
 
     def make_move(input)
       case input[:command]
-      when "PLACE"
+      when 'PLACE'
         create_robot(input)
-      when "MOVE"
+      when 'MOVE'
         move_robot
-      when "LEFT"
-        @robot.turn("LEFT")
-      when "RIGHT"
-        @robot.turn("RIGHT")
-      when "REPORT"
+      when 'LEFT'
+        @robot.turn('LEFT')
+      when 'RIGHT'
+        @robot.turn('RIGHT')
+      when 'REPORT'
         puts report_message
-      when "EXIT"
+      when 'EXIT'
         exit
       end
     end
@@ -79,7 +79,7 @@ module ToyRobot
 
 
     def elicit_input
-      puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\nEXIT\n\n"
+      puts '\n\nChoose:\nPLACE X,Y,F (e.g. "PLACE 0,3,NORTH")\nMOVE\nLEFT\nRIGHT\nREPORT\nEXIT\n\n'
       gets.chomp
     end
 
@@ -88,11 +88,11 @@ module ToyRobot
     end
 
     def possible_directions
-      ['NORTH', 'EAST', 'SOUTH', 'WEST']
+      %w[NORTH EAST SOUTH WEST]
     end
 
     def possible_commands
-      ["PLACE", "MOVE", "LEFT", "RIGHT", "REPORT", "EXIT"]
+      %w[PLACE MOVE LEFT RIGHT REPORT EXIT]
     end
 
     def number_or_nil(string)

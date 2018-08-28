@@ -1,11 +1,11 @@
 require File.expand_path('../../lib/toy_robot/robot', __FILE__)
 
 RSpec.describe ToyRobot::Robot do
-  subject(:robot) { ToyRobot::Robot.new({ location: [0,0], facing: 'NORTH' }) }
+  subject(:robot) { ToyRobot::Robot.new({ location: [0, 0], facing: 'NORTH' }) }
 
   context '#initialize' do
     it 'returns the location' do
-      expect(robot.location).to eq([0,0])
+      expect(robot.location).to eq([0, 0])
     end
 
     it 'returns the facing direction' do
@@ -27,8 +27,8 @@ RSpec.describe ToyRobot::Robot do
 
   context '#move_to' do
     it 'changes location' do
-      robot.move_to([5,5])
-      expect(robot.location).to eq([5,5])
+      robot.move_to([5, 5])
+      expect(robot.location).to eq([5, 5])
     end
   end
 end

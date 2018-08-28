@@ -18,10 +18,10 @@ module ToyRobot
     def location_after_move(current_location_facing)
       current_location = current_location_facing[:location]
       facing = current_location_facing[:facing]
-      moves = { "NORTH" => [current_location[0], current_location[1] + 1],
-                "EAST" => [current_location[0] + 1, current_location[1]],
-                "SOUTH" => [current_location[0], current_location[1] - 1],
-                "WEST" => [current_location[0] - 1, current_location[1]],
+      moves = { 'NORTH' => [current_location[0], current_location[1] + 1],
+                'EAST' => [current_location[0] + 1, current_location[1]],
+                'SOUTH' => [current_location[0], current_location[1] - 1],
+                'WEST' => [current_location[0] - 1, current_location[1]],
               }
       moves[facing]
     end
