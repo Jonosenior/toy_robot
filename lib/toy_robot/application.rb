@@ -11,26 +11,30 @@ module ToyRobot
     def new_round
       loop do
         input = elicit_input
-        input = convert_input(input)
+        instruction = convert_input(input)
         # binding.pry
-        if !is_input_valid?(input)
+        if !is_instruction_valid?(instruction)
           puts 'Please give a valid instruction!'
           redo
         end
-        make_move(input)
+        make_move(instruction)
       end
     end
 
-    def is_input_valid?(input)
-      command = input[:command]
-      return false unless possible_commands.include?(command)
-      if command == "PLACE"
-        return false unless possible_directions.include?(input[:facing])
-        return false if !@table.valid_location?(input[:location])
-        return true
+    def is_instruction_valid?(instruction)
+      begin
+        command = instruction[:command]
+        return false unless possible_commands.include?(command)
+        if command == "PLACE"
+          return false unless possible_directions.include?(instruction[:facing])
+          return false if !@table.valid_location?(instruction[:location])
+          return true
+        end
+        return false if !@robot && command != "PLACE"
+        return false if command == "MOVE" && !@table.valid_move?(@robot.location_and_facing)
+      rescue
+        return false
       end
-      return false if !@robot && command != "PLACE"
-      return false if command == "MOVE" && !@table.valid_move?(@robot.location_and_facing)
       true
     end
 
@@ -53,7 +57,7 @@ module ToyRobot
     def convert_input(input)
       input = input.split(/[\s^,]+/)
       input = { command: input[0].upcase,
-                location: [input[1].to_i, input[2].to_i],
+                location: [number_or_nil(input[1]), number_or_nil(input[2])],
                 facing: input[3]
               }
     end
@@ -81,5 +85,9 @@ module ToyRobot
       ["PLACE", "MOVE", "LEFT", "RIGHT", "REPORT"]
     end
 
+    def number_or_nil(string)
+      num = string.to_i
+      num if num.to_s == string
+    end
   end
 end

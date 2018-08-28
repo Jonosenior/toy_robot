@@ -20,42 +20,35 @@ RSpec.describe ToyRobot::Application do
     context 'when command is PLACE' do
 
       it 'returns a robot' do
-        input = {command: "PLACE", location: [0,1], facing: "WEST"}
-        expect(app.make_move(input)).to be_a ToyRobot::Robot
+        instruction = {command: "PLACE", location: [0,1], facing: "WEST"}
+        expect(app.make_move(instruction)).to be_a ToyRobot::Robot
       end
 
       it 'saves a new robot as instance variable' do
-        input = {command: "PLACE", location: [0,1], facing: "WEST"}
-        app.make_move(input)
+        instruction = {command: "PLACE", location: [0,1], facing: "WEST"}
+        app.make_move(instruction)
         expect(app.instance_variable_get('@robot').class).to eq(ToyRobot::Robot)
       end
 
       it 'saves a robot with correct location' do
-        input = {command: "PLACE", location: [4,5], facing: "WEST"}
-        app.make_move(input)
-        expect(app.instance_variable_get('@robot').location).to eq(input[:location])
+        instruction = {command: "PLACE", location: [4,5], facing: "WEST"}
+        app.make_move(instruction)
+        expect(app.instance_variable_get('@robot').location).to eq(instruction[:location])
       end
 
       it 'saves a robot with correct facing direction' do
-        input = {command: "PLACE", location: [4,5], facing: "SOUTH"}
-        app.make_move(input)
-        expect(app.instance_variable_get('@robot').facing).to eq(input[:facing])
+        instruction = {command: "PLACE", location: [4,5], facing: "SOUTH"}
+        app.make_move(instruction)
+        expect(app.instance_variable_get('@robot').facing).to eq(instruction[:facing])
       end
-
-      # it 'sends a new message to Robot class' do
-      #   input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
-      #   app.make_move(input)
-      #   expect(ToyRobot::Robot).to receive(:new)
-      # end
-
     end
 
     context 'when command is MOVE' do
       before do
-        input = {command: "PLACE", location: [0,1], facing: "NORTH"}
-        app.create_robot(input)
-        input = {command: "MOVE"}
-        app.make_move(input)
+        instruction = {command: "PLACE", location: [0,1], facing: "NORTH"}
+        app.create_robot(instruction)
+        instruction = {command: "MOVE"}
+        app.make_move(instruction)
       end
 
       it 'updates robot\'s location' do
@@ -70,10 +63,10 @@ RSpec.describe ToyRobot::Application do
     context 'when command is LEFT' do
 
       before do
-        input = {command: "PLACE", location: [0,1], facing: "NORTH"}
-        app.create_robot(input)
-        input = {command: "LEFT"}
-        app.make_move(input)
+        instruction = {command: "PLACE", location: [0,1], facing: "NORTH"}
+        app.create_robot(instruction)
+        instruction = {command: "LEFT"}
+        app.make_move(instruction)
       end
 
       it 'turns robot left' do
@@ -84,10 +77,10 @@ RSpec.describe ToyRobot::Application do
     context 'when command is RIGHT' do
 
       before do
-        input = {command: "PLACE", location: [4,5], facing: "EAST"}
-        app.create_robot(input)
-        input = {command: "RIGHT"}
-        app.make_move(input)
+        instruction = {command: "PLACE", location: [4,5], facing: "EAST"}
+        app.create_robot(instruction)
+        instruction = {command: "RIGHT"}
+        app.make_move(instruction)
       end
 
       it 'turns robot right' do
@@ -98,13 +91,13 @@ RSpec.describe ToyRobot::Application do
 
     context 'when command is REPORT' do
       before do
-        input = {command: "PLACE", location: [2,3], facing: "SOUTH"}
-        app.create_robot(input)
+        instruction = {command: "PLACE", location: [2,3], facing: "SOUTH"}
+        app.create_robot(instruction)
       end
 
       it 'prints the robot\'s location and facing direction' do
-        input = {command: "REPORT"}
-        expect { app.make_move(input) }.to output("\n2,3,SOUTH\n").to_stdout
+        instruction = {command: "REPORT"}
+        expect { app.make_move(instruction) }.to output("\n2,3,SOUTH\n").to_stdout
 
       end
     end
@@ -112,13 +105,13 @@ RSpec.describe ToyRobot::Application do
 
   context '#create_robot' do
     it 'creates a robot' do
-      input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
-      expect(app.create_robot(input)).to be_a ToyRobot::Robot
+      instruction = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+      expect(app.create_robot(instruction)).to be_a ToyRobot::Robot
     end
 
     it 'saves the robot as an instance variable' do
-      input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
-      app.create_robot(input)
+      instruction = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+      app.create_robot(instruction)
       expect(app.instance_variable_get('@robot').class).to eq(ToyRobot::Robot)
     end
   end
