@@ -35,18 +35,18 @@ module ToyRobot
 
     def make_move(input)
       case input[:command]
-        when "PLACE"
-          create_robot(input)
-        when "MOVE"
-          move_robot
-        when "LEFT"
-          @robot.turn("LEFT")
-        when "RIGHT"
-          @robot.turn("RIGHT")
-        when "REPORT"
-          puts report_message
-        when "EXIT"
-          exit
+      when "PLACE"
+        create_robot(input)
+      when "MOVE"
+        move_robot
+      when "LEFT"
+        @robot.turn("LEFT")
+      when "RIGHT"
+        @robot.turn("RIGHT")
+      when "REPORT"
+        puts report_message
+      when "EXIT"
+        exit
       end
     end
 
@@ -107,6 +107,6 @@ module ToyRobot
     def falls_off_table?
       !@table.valid_move?(@robot.location_and_facing)
     end
-    
+
   end
 end
