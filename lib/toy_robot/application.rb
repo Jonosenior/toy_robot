@@ -12,7 +12,6 @@ module ToyRobot
       loop do
         input = elicit_input
         instruction = convert_input(input)
-        # binding.pry
         if !is_instruction_valid?(instruction)
           puts 'Please give a valid instruction!'
           redo
@@ -43,8 +42,7 @@ module ToyRobot
         when "PLACE"
           create_robot(input)
         when "MOVE"
-          new_location = @table.location_after_move(@robot.location_and_facing)
-          @robot.move_to(new_location)
+          move_robot
         when "LEFT"
           @robot.turn("LEFT")
         when "RIGHT"
@@ -67,6 +65,13 @@ module ToyRobot
       facing = input[:facing]
       @robot = ToyRobot::Robot.new({location: location, facing: facing})
     end
+
+    def move_robot
+      current_location_facing = @robot.location_and_facing
+      new_location = @table.location_after_move(current_location_facing)
+      @robot.move_to(new_location)
+    end
+
 
     def elicit_input
       puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\n\n"
