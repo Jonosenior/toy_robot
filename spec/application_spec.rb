@@ -20,40 +20,78 @@ RSpec.describe ToyRobot::Application do
     context 'when command is PLACE' do
 
       it 'returns a robot' do
-        input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+        input = {command: "PLACE", location: [0,1], facing: "WEST"}
         expect(app.make_move(input)).to be_a ToyRobot::Robot
       end
 
       it 'saves a new robot as instance variable' do
-        input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+        input = {command: "PLACE", location: [0,1], facing: "WEST"}
         app.make_move(input)
         expect(app.instance_variable_get('@robot').class).to eq(ToyRobot::Robot)
       end
 
       it 'saves a robot with correct location' do
-        input = {command: "PLACE", location: "[4,5]", facing: "WEST"}
+        input = {command: "PLACE", location: [4,5], facing: "WEST"}
         app.make_move(input)
         expect(app.instance_variable_get('@robot').location).to eq(input[:location])
       end
 
       it 'saves a robot with correct facing direction' do
-        input = {command: "PLACE", location: "[4,5]", facing: "SOUTH"}
+        input = {command: "PLACE", location: [4,5], facing: "SOUTH"}
         app.make_move(input)
         expect(app.instance_variable_get('@robot').facing).to eq(input[:facing])
       end
 
-      it 'sends a new message to Robot class' do
-        input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
-        app.make_move(input)
-        expect(ToyRobot::Robot).to receive(:new)
-      end
+      # it 'sends a new message to Robot class' do
+      #   input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+      #   app.make_move(input)
+      #   expect(ToyRobot::Robot).to receive(:new)
+      # end
 
     end
 
     context 'when command is MOVE' do
       before do
-        input = {command: "PLACE", location: "[0,1]", facing: "WEST"}
+        input = {command: "PLACE", location: [0,1], facing: "NORTH"}
         app.create_robot(input)
+        input = {command: "MOVE"}
+        app.make_move(input)
+      end
+
+      it 'updates robot\'s location' do
+        expect(app.instance_variable_get('@robot').location).to eq([0,2])
+      end
+
+      it 'doesn\'t save previous location' do
+        expect(app.instance_variable_get('@robot').location).not_to eq([0,1])
+      end
+    end
+
+    context 'when command is LEFT' do
+
+      before do
+        input = {command: "PLACE", location: [0,1], facing: "NORTH"}
+        app.create_robot(input)
+        input = {command: "LEFT"}
+        app.make_move(input)
+      end
+
+      it 'turns robot left' do
+        expect(app.instance_variable_get('@robot').facing).to eq("WEST")
+      end
+    end
+
+    context 'when command is RIGHT' do
+
+      before do
+        input = {command: "PLACE", location: [4,5], facing: "EAST"}
+        app.create_robot(input)
+        input = {command: "RIGHT"}
+        app.make_move(input)
+      end
+
+      it 'turns robot right' do
+        expect(app.instance_variable_get('@robot').facing).to eq("SOUTH")
       end
 
     end
