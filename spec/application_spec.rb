@@ -26,8 +26,13 @@ RSpec.describe ToyRobot::Application do
     end
 
     context 'when command is PLACE' do
-      it 'returns false if a co-ordinate is nil' do
+      it 'returns false if x co-ordinate is nil' do
         instruction = { command: "PLACE", location: [nil,1], facing:"SOUTH"  }
+        expect(app.valid_instruction?(instruction)).to be_falsey
+      end
+
+      it 'returns false if y co-ordinate is nil' do
+        instruction = { command: "PLACE", location: [4,nil], facing:"SOUTH"  }
         expect(app.valid_instruction?(instruction)).to be_falsey
       end
 
@@ -38,6 +43,27 @@ RSpec.describe ToyRobot::Application do
 
       it 'returns true if instruction is valid' do
         instruction = { command: "PLACE", location: [2,3], facing: "NORTH" }
+        expect(app.valid_instruction?(instruction)).to be_truthy
+      end
+    end
+
+    context 'when command is MOVE' do
+      it 'returns false if off board' do
+        instruction = { command: "PLACE", location: [5,5], facing: "NORTH" }
+        app.make_move(instruction)
+        instruction = { command: "MOVE" }
+        expect(app.valid_instruction?(instruction)).to be_falsey
+      end
+
+      it 'returns false if robot not yet placed' do
+        instruction = { command: "MOVE" }
+        expect(app.valid_instruction?(instruction)).to be_falsey
+      end
+
+      it 'returns true if move is valid' do
+        instruction = { command: "PLACE", location: [1,1], facing: "SOUTH" }
+        app.make_move(instruction)
+        instruction = { command: "MOVE" }
         expect(app.valid_instruction?(instruction)).to be_truthy
       end
     end

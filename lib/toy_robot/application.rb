@@ -1,5 +1,6 @@
 require_relative 'table'
 require_relative 'robot'
+require 'pry'
 
 module ToyRobot
   class Application
@@ -23,15 +24,14 @@ module ToyRobot
     def valid_instruction?(instruction)
       begin
         command = instruction[:command]
-        # binding.pry
         return false unless possible_commands.include?(command)
         if command == "PLACE"
           return false unless possible_directions.include?(instruction[:facing])
           return false if !@table.valid_location?(instruction[:location])
           return true
         end
-        return false if !@robot && command != "PLACE" || command != "EXIT"
-        binding.pry
+        # binding.pry
+        return false if !@robot && (command != "PLACE" || command != "EXIT")
         return false if command == "MOVE" && !@table.valid_move?(@robot.location_and_facing)
       rescue
         return false
