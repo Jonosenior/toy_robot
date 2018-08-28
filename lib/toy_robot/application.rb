@@ -8,11 +8,11 @@ module ToyRobot
       @table = ToyRobot::Table.new([5,5])
     end
 
-    def new_round
+    def start
       loop do
         input = elicit_input
         instruction = convert_input(input)
-        if !is_instruction_valid?(instruction)
+        if !valid_instruction?(instruction)
           puts 'Please give a valid instruction!'
           redo
         end
@@ -20,7 +20,7 @@ module ToyRobot
       end
     end
 
-    def is_instruction_valid?(instruction)
+    def valid_instruction?(instruction)
       # begin
         command = instruction[:command]
         return false unless possible_commands.include?(command)
