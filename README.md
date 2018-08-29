@@ -99,7 +99,7 @@ REPORT
 
 ## Acknowledgement
 
-The Toy Robot Challenge was originally formulated by [Jon Eaves](https://twitter.com/joneaves)
+The Toy Robot Challenge was originally formulated by [Jon Eaves](https://twitter.com/joneaves). This project and the explanation in the README comes from [Ask Charlie](https://github.com/askcharlie/toy_robot).
 
 ## Installation
 
