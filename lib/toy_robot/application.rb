@@ -5,7 +5,7 @@ module ToyRobot
 
   # The Application class directs the overall logic:
   # converting input, checking user's instruction is valid,
-  # applying the instruction) and interacts with the user.
+  # applying the instruction; and interacts with the user.
   class Application
 
     def initialize
