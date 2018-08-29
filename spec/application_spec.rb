@@ -15,9 +15,12 @@ RSpec.describe ToyRobot::Application do
     end
   end
 
-  # context 'start' do
+  # context '#start' do
+  #
   #   it 'will not accept invalid command' do
-  #     allow(app).to receive(:gets).and_return('REPORT')
+  #     input = 'REPORT'
+  #     allow(app).to receive(:gets).and_return(input)
+  #     allow(app).to receive(:loop).and_yield
   #     expect { app.start }.to output('Please give a valid instruction!').to_stdout
   #   end
   # end
@@ -204,6 +207,21 @@ RSpec.describe ToyRobot::Application do
       expect(app.instance_variable_get('@robot').class).to eq(ToyRobot::Robot)
     end
   end
+
+  context '#elicit_input' do
+    it 'returns the input' do
+      input = 'REPORT'
+      allow(app).to receive(:gets).and_return(input)
+      expect(app.elicit_input).to eq(input)
+    end
+
+    it 'prints the elict input message' do
+      message = "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\nEXIT\n\n"
+      allow(app).to receive(:gets).and_return("REPORT")
+      expect { app.elicit_input }.to output(message).to_stdout
+    end
+  end
+
 
 
 end
