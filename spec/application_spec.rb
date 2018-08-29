@@ -14,14 +14,18 @@ RSpec.describe ToyRobot::Application do
     end
   end
 
-  # context '#start' do
-  #   context 'given an invalid input' do
-  #     it 'reruns the loop' do
-  #       allow(app).to receive(:elicit_input).and_return('SKDFJ', 'EXIT')
-  #       expect(app).to receive(:make_move).twice
-  #       app.start
-  #     end
-  #   end
+  context '#start' do
+    context 'given an invalid input' do
+
+      it 'prints a retry message' do
+        allow(app).to receive(:elicit_input).and_return('SKDFJ', 'EXIT')
+        message = 'Please give a valid instruction!'
+        expect { app.start }.to output(message).to_stdout
+        # expect(app).to receive(:convert_input).exactly(2).times
+        app.start
+      end
+    end
+  end
 
     # it 'will not accept invalid command' do
       # allow(:elicit_input).to receive(:gets).and_return {
