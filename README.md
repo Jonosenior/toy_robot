@@ -22,7 +22,7 @@ $ ruby lib/toy_robot.rb
 
 To run the test suite, type:
 ```
-$ bundle exec rspec spec
+$ rspec spec
 ```
 
 ## Task
