@@ -1,5 +1,6 @@
 require_relative 'table'
 require_relative 'robot'
+require 'pry'
 
 module ToyRobot
 
@@ -20,6 +21,7 @@ module ToyRobot
       loop do
         input = elicit_input
         instruction = convert_input(input)
+        # binding.pry
         unless valid_instruction?(instruction)
           puts 'Please give a valid instruction!'
           redo
@@ -29,11 +31,12 @@ module ToyRobot
     end
 
     # Checks that instruction hash is valid:
-    # if it reflects one of the possible commands,
+    # if it includes one of the possible commands,
     # if it's a valid place command, if it requires a
     # non-existent robot and if it's a move that would fall
     # off the table.
     def valid_instruction?(instruction)
+      return false if instruction.nil?
       command = instruction[:command]
       return false unless possible_commands.include?(command)
       if command == 'PLACE'
