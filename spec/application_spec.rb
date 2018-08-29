@@ -42,7 +42,7 @@ RSpec.describe ToyRobot::Application do
       # allow(app).to receive(:loop).and_yield
       # expect { app.start }.to output('Please give a valid instruction!').to_stdout
     # end
-  end
+  # end
 
   context '#valid_instruction?' do
     context 'when command is invalid' do
