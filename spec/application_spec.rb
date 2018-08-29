@@ -1,5 +1,4 @@
 require File.expand_path('../../lib/toy_robot/application', __FILE__)
-# require File.expand_path('../../lib/toy_robot/robot', __FILE__)
 
 
 RSpec.describe ToyRobot::Application do
@@ -16,14 +15,34 @@ RSpec.describe ToyRobot::Application do
   end
 
   # context '#start' do
-  #
-  #   it 'will not accept invalid command' do
-  #     input = 'REPORT'
-  #     allow(app).to receive(:gets).and_return(input)
-  #     allow(app).to receive(:loop).and_yield
-  #     expect { app.start }.to output('Please give a valid instruction!').to_stdout
+  #   context 'given an invalid input' do
+  #     it 'reruns the loop' do
+  #       allow(app).to receive(:elicit_input).and_return('SKDFJ', 'EXIT')
+  #       expect(app).to receive(:make_move).twice
+  #       app.start
+  #     end
   #   end
-  # end
+
+    # it 'will not accept invalid command' do
+      # allow(:elicit_input).to receive(:gets).and_return {
+      #   @counter ||= 0
+      #   response = if @counter > 2 # an arbitrary threshold
+      #                "EXIT"
+      #              else
+      #                "SKDJF"
+      #              end
+      #   @counter += 1
+      #   response
+      # }
+
+      # allow(app).to receive(:gets).and_return(input)
+
+      # allow(app).to receive(:loop).and_yield
+      # expect(app).to receive(:elicit_input).and_return(input)
+      # allow(app).to receive(:loop).and_yield
+      # expect { app.start }.to output('Please give a valid instruction!').to_stdout
+    # end
+  end
 
   context '#valid_instruction?' do
     context 'when command is invalid' do
