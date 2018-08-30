@@ -1,6 +1,5 @@
 require_relative 'table'
 require_relative 'robot'
-require 'pry'
 
 module ToyRobot
 
@@ -21,7 +20,6 @@ module ToyRobot
       loop do
         input = elicit_input
         instruction = convert_input(input)
-        # binding.pry
         unless valid_instruction?(instruction)
           puts 'Please give a valid instruction!'
           redo
