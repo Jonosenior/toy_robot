@@ -29,11 +29,11 @@ $ rspec spec
 
 * There are three classes:
 
-..* **Application**. Directs overall application logic, mainly: eliciting user input; converting the input into an instruction; checking the instruction is valid (and ignoring it if not) and applying the instruction.
+  * **Application**. Directs overall application logic, mainly: eliciting user input; converting the input into an instruction; checking the instruction is valid (and ignoring it if not) and applying the instruction.
 
-..* **Table**. Stores the dimensions of the table, whether location is valid (ie, if it lies on the table), and whether a given 'MOVE' command is possible.
+  * **Table**. Stores the dimensions of the table, whether location is valid (ie, if it lies on the table), and whether a given 'MOVE' command is possible.
 
-..* **Robot**. Stores the current location and facing direction of the robot, and can edit either (by moving or turning).
+  * **Robot**. Stores the current location and facing direction of the robot, and can edit either (by moving or turning).
 
 * The Table is initialized with a size array - the default is 5 * 5 but a manual size input will override this, which gives the flexibility of using different size tables.  
 
