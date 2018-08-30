@@ -26,9 +26,14 @@ RSpec.describe ToyRobot::Robot do
   end
 
   context '#move_to' do
-    it 'changes location' do
+    it 'changes to new location' do
       robot.move_to([5, 5])
       expect(robot.location).to eq([5, 5])
+    end
+
+    it 'forgets old location' do
+      robot.move_to([5, 5])
+      expect(robot.location).not_to eq([0, 0])
     end
   end
 end

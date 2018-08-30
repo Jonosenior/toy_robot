@@ -1,8 +1,8 @@
 require File.expand_path('../../lib/toy_robot/table', __FILE__)
 
 RSpec.describe ToyRobot::Table do
-  context 'initialized as a 5 by 5 table' do
-    subject(:table) { ToyRobot::Table.new([5, 5]) }
+  context '#initialize' do
+    subject(:table) { ToyRobot::Table.new }
 
 
     describe '#valid_location?' do

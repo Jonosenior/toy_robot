@@ -14,18 +14,44 @@ RSpec.describe ToyRobot::Application do
     end
   end
 
-  context '#start' do
-    context 'given an invalid input' do
+  # context '#start' do
+  #   context 'given an invalid input' do
+  #     it 'prints a retry message' do
+  #       allow(app).to receive(:loop)
+  #       allow(app).to receive(:elicit_input).and_return('SKDFJ')
+  #       message = 'Please give a valid instruction!'
+  #       expect { app.start }.to output(message).to_stdout
+  #       # (app).to receive(:convert_input).exactly(2).times
+  #     end
+  #   end
+  # end
 
-      it 'prints a retry message' do
-        allow(app).to receive(:elicit_input).and_return('SKDFJ', 'EXIT')
-        message = 'Please give a valid instruction!'
-        expect { app.start }.to output(message).to_stdout
-        # expect(app).to receive(:convert_input).exactly(2).times
-        app.start
-      end
-    end
-  end
+  # context '#start' do
+  #   context 'user input is "EXIT"' do
+  #     it 'exits the program' do
+  #       allow(app).to receive(:elicit_input).and_return('EXIT')
+  #       expect { app.start }.to raise_error(SystemExit)
+  #     end
+  #   end
+  #
+  #   context 'user input is invalid command' do
+  #
+  #     it 'prints a retry message' do
+  #       allow(app).to receive(:elicit_input).and_return('SDFKJ', 'EXIT')
+  #       message = 'Please give a valid instruction!'
+  #       # expect(app.start).to output("d").to_stdout
+  #       expect(app.start).to raise_error(SystemExit).and_return output
+  #       # expect(app.start).not_to output("d").to_stdout
+  #       # binding.pry
+  #       # expect(app.start).to output(message).to_stdout
+  #
+  #       #.to raise_error(SystemExit)
+  #     end
+  #   end
+  #
+  #
+  #
+  # end
 
     # it 'will not accept invalid command' do
       # allow(:elicit_input).to receive(:gets).and_return {
@@ -243,6 +269,33 @@ RSpec.describe ToyRobot::Application do
       allow(app).to receive(:gets).and_return("REPORT")
       expect { app.elicit_input }.to output(message).to_stdout
     end
+  end
+
+  context '#convert_input' do
+    context 'when input is lower case' do
+      it 'returns as upper case' do
+        input = 'place 3,5,north'
+        expected = { command: 'PLACE', location: [3, 5], facing: 'NORTH'}
+        expect(app.convert_input(input)).to eq(expected)
+      end
+    end
+
+    context 'when input location is not integer' do
+      it 'returns location as nil' do
+        input = 'PLACE a,b,SOUTH'
+        expected = { command: 'PLACE', location: [nil, nil], facing: 'SOUTH'}
+        expect(app.convert_input(input)).to eq(expected)
+      end
+    end
+
+    context 'when input has extraneous spaces' do
+      it 'returns correct result' do
+        input = 'PLACE 4  , 4 ,      EAST'
+        expected = { command: 'PLACE', location: [4,4], facing: 'EAST'}
+        expect(app.convert_input(input)).to eq(expected)
+      end
+    end
+
   end
 
 
