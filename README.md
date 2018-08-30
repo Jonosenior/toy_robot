@@ -25,6 +25,21 @@ To run the test suite, type:
 $ rspec spec
 ```
 
+## Notes
+
+* There are three classes:
+  ** **Application**. Directs overall application logic, mainly: eliciting user input; converting the input into an instruction; checking the instruction is valid (and ignoring it if not) and applying the instruction.
+
+  ** **Table**. Stores the dimensions of the table, whether location is valid (ie, if it lies on the table), and whether a given 'MOVE' command is possible.
+
+  ** **Robot**. Stores the current location and facing direction of the robot, and can edit either (by moving or turning).
+
+* The Table is initialized with a size array - the default is 5 * 5 but a manual size input will override this, which gives the flexibility of using different size tables.  
+
+* The Robot is initialized with an options hash (which reduces the dependency on fixed-order arguments, a trick from Sandi Metz's POODR).
+
+* The app stores the x,y co-ordinates like so: [x, y]. I considered using a more descriptive hash, like this `location = { x-coordinate: 1, y-coordinate: 2 }` but decided this would be overly fussy since ordered pairs (x,y) are the norm for Cartesian coordinate system.
+
 ## Task
 
 Create an application that can read in commands of the following form:
@@ -100,8 +115,3 @@ REPORT
 ## Acknowledgement
 
 The Toy Robot Challenge was originally formulated by [Jon Eaves](https://twitter.com/joneaves). This project and the explanation in the README comes from [Ask Charlie](https://github.com/askcharlie/toy_robot).
-
-## Installation
-
-## Notes
-- The app stores the x,y co-ordinates as like so: [x, y].
