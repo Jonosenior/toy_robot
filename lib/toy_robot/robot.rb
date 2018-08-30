@@ -25,8 +25,8 @@ module ToyRobot
       @facing = (left_or_right == 'LEFT') ? turn_left[@facing] : turn_right[@facing]
     end
 
-    # Converts location and facing direction into a
-    # convenient hash. 
+    # Converts location and facing direction variables into a
+    # convenient hash.
     def location_and_facing
       { location: @location, facing: @facing }
     end

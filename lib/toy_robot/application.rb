@@ -9,7 +9,7 @@ module ToyRobot
   class Application
 
     def initialize
-      @table = ToyRobot::Table.new([5,5])
+      @table = ToyRobot::Table.new
     end
 
     # Main application method: elicits user input,
@@ -81,7 +81,7 @@ module ToyRobot
     # optionally values for location (integers converted from
     # the input string) and facing direction.
     def convert_input(input)
-      input = input.split(/[\s^,]+/)
+      input = input.upcase.split(/[\s^,]+/)
       instruction = { command: input[0].upcase,
                 location: [number_or_nil(input[1]), number_or_nil(input[2])],
                 facing: input[3]
@@ -97,6 +97,12 @@ module ToyRobot
       @robot = ToyRobot::Robot.new({location: location, facing: facing})
     end
 
+    def elicit_input
+      puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\nEXIT\n\n"
+      gets.chomp
+    end
+
+    private
 
     # Moves the robot one step forward by asking table
     # where the new location is then asking robot to save
@@ -105,12 +111,6 @@ module ToyRobot
       current_location_facing = @robot.location_and_facing
       new_location = @table.location_after_move(current_location_facing)
       @robot.move_to(new_location)
-    end
-
-
-    def elicit_input
-      puts "\n\nChoose:\nPLACE X,Y,F (e.g. 'PLACE 0,3,NORTH')\nMOVE\nLEFT\nRIGHT\nREPORT\nEXIT\n\n"
-      gets.chomp
     end
 
     def report_message

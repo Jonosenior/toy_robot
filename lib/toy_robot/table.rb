@@ -4,7 +4,7 @@ module ToyRobot
   # a location is valid (ie, if it lies on the table), and
   # whether a given 'MOVE' command is possible.
   class Table
-    def initialize(size)
+    def initialize(size = [5, 5])
       @size = size
     end
 
