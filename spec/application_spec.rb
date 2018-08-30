@@ -14,66 +14,6 @@ RSpec.describe ToyRobot::Application do
     end
   end
 
-  # context '#start' do
-  #   context 'given an invalid input' do
-  #     it 'prints a retry message' do
-  #       allow(app).to receive(:loop)
-  #       allow(app).to receive(:elicit_input).and_return('SKDFJ')
-  #       message = 'Please give a valid instruction!'
-  #       expect { app.start }.to output(message).to_stdout
-  #       # (app).to receive(:convert_input).exactly(2).times
-  #     end
-  #   end
-  # end
-
-  # context '#start' do
-  #   context 'user input is "EXIT"' do
-  #     it 'exits the program' do
-  #       allow(app).to receive(:elicit_input).and_return('EXIT')
-  #       expect { app.start }.to raise_error(SystemExit)
-  #     end
-  #   end
-  #
-  #   context 'user input is invalid command' do
-  #
-  #     it 'prints a retry message' do
-  #       allow(app).to receive(:elicit_input).and_return('SDFKJ', 'EXIT')
-  #       message = 'Please give a valid instruction!'
-  #       # expect(app.start).to output("d").to_stdout
-  #       expect(app.start).to raise_error(SystemExit).and_return output
-  #       # expect(app.start).not_to output("d").to_stdout
-  #       # binding.pry
-  #       # expect(app.start).to output(message).to_stdout
-  #
-  #       #.to raise_error(SystemExit)
-  #     end
-  #   end
-  #
-  #
-  #
-  # end
-
-    # it 'will not accept invalid command' do
-      # allow(:elicit_input).to receive(:gets).and_return {
-      #   @counter ||= 0
-      #   response = if @counter > 2 # an arbitrary threshold
-      #                "EXIT"
-      #              else
-      #                "SKDJF"
-      #              end
-      #   @counter += 1
-      #   response
-      # }
-
-      # allow(app).to receive(:gets).and_return(input)
-
-      # allow(app).to receive(:loop).and_yield
-      # expect(app).to receive(:elicit_input).and_return(input)
-      # allow(app).to receive(:loop).and_yield
-      # expect { app.start }.to output('Please give a valid instruction!').to_stdout
-    # end
-  # end
-
   context '#valid_instruction?' do
     context 'when command is invalid' do
       instruction = { command: 'PLECE' }
